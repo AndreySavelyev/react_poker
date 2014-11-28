@@ -26,9 +26,14 @@ var moment = require('moment');
 var RoomPage = React.createClass({
   mixins: [Fluxable],
   watchStores: [MessagesStore, UsersStore],
+  tick: function() {
+    ChatApi.activeUser(this.state.currentUser);
+    console.log('setInterval');
+  },
   componentDidMount: function() {
+    setInterval(this.tick.bind(this), 1000);
     ChatApi.onMessagesChange(function(){
-      MessagesActions.changed()
+      MessagesActions.changed();
       console.log('onMessagesChange');
     });
     ChatApi.onUsersChange(function(){

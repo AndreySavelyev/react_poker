@@ -14,7 +14,10 @@ var currentUser = null;
 
 var UsersStore = new Store({
   all: function() {
-    return ChatApi.getUsers().list();
+    console.log('users');
+    var userlist = ChatApi.getUsers().list();
+    console.log(userlist);
+    return userlist;
   },
 
   currentUser: function() {
