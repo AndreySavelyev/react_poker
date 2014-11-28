@@ -6,6 +6,9 @@
 
 var React = require('react/addons');
 
+var Routes = require('react-router');
+var Link = Routes.Link;
+
 var RoomPage = React.createClass({
   render: function() {
     return (
