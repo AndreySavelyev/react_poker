@@ -13,7 +13,7 @@ var Link = Routes.Link;
 var Fluxable = require('./../behaviors/Fluxable');
 var MessagesStore = require('./../stores/MessagesStore');
 var MessagesActions = require('./../actions/MessagesActions');
-
+var UsersActions = require('./../actions/UsersActions');
 var UsersStore = require('./../stores/UsersStore');
 // var MessagesActions = require('./../actions/MessagesActions');
 
@@ -26,6 +26,16 @@ var moment = require('moment');
 var RoomPage = React.createClass({
   mixins: [Fluxable],
   watchStores: [MessagesStore, UsersStore],
+  componentDidMount: function() {
+    ChatApi.onMessagesChange(function(){
+      MessagesActions.changed()
+      console.log('onMessagesChange');
+    });
+    ChatApi.onUsersChange(function(){
+      UsersActions.changed();
+      console.log('onUsersChange');
+    });
+  },
   addMessage: function(user, text){
     MessagesActions.addMessage(user, text);
   },
@@ -39,8 +49,8 @@ var RoomPage = React.createClass({
   render: function() {
     return (
       <div>
-        <MessageList messages={this.state.messages} />
         <SendForm user={this.state.currentUser} onsubmit={this.addMessage}/>
+        <MessageList messages={this.state.messages} />
         <UserList userlist={this.state.userlist} />
       </div>
     );

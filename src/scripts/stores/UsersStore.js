@@ -35,6 +35,10 @@ UsersStore.registerHandler(UsersConstants.LOGIN_SUCCESS, function(payload) {
   this.emitChange();
 });
 
+UsersStore.registerHandler(UsersConstants.CHANGED, function(payload) {
+  this.emitChange();
+});
+
 
 module.exports = UsersStore;
 

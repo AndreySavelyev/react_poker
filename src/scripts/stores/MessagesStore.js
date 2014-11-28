@@ -44,6 +44,11 @@ MessageStore.registerHandler(MessagesConstants.ADD_SUCCESS, function(payload) {
   this.emitChange();
 });
 
+MessageStore.registerHandler(MessagesConstants.CHANGED, function(payload) {
+  this.emitChange();
+});
+
+
 module.exports = MessageStore;
 
 

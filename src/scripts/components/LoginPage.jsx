@@ -18,9 +18,7 @@ var LoginPage = React.createClass({
     this.setState({username: event.target.value});
   },
   handleClick: function() {
-    console.log('click');
     UsersActions.login(this.state.username);
-    console.log('click2');
   },
   render: function() {
     return (

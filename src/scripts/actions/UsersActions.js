@@ -13,6 +13,12 @@ function login(name) {
   AppDispatcher.handleAction(UsersConstants.LOGIN_SUCCESS, {user: user});
 }
 
+function changed(){
+  AppDispatcher.handleAction(UsersConstants.CHANGE);
+}
+
+
 module.exports = {
-  login: login
+  login: login,
+  changed: changed
 };

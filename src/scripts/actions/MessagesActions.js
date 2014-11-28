@@ -12,6 +12,11 @@ function addMessage(user, text) {
   AppDispatcher.handleAction(MessagesConstants.ADD_SUCCESS);
 }
 
+function changed(){
+  AppDispatcher.handleAction(MessagesConstants.CHANGED);
+}
+
 module.exports = {
-  addMessage: addMessage
+  addMessage: addMessage,
+  changed: changed
 };
