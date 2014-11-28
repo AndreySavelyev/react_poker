@@ -28,7 +28,7 @@ var active = null;
 
 var MessageStore = new Store({
   all: function() {
-    return messages;
+    return ChatApi.getMessages().list();
   },
 
   isLoaded: function() {
@@ -40,22 +40,7 @@ var MessageStore = new Store({
   }
 });
 
-MessageStore.registerHandler(MessagesConstants.ADD_START, function(payload) {
-  active = payload;
-
-  this.emitChange();
-});
-
 MessageStore.registerHandler(MessagesConstants.ADD_SUCCESS, function(payload) {
-  active = payload;
-  messages.push(
-        {
-          id: moment().unix(),
-          user: payload.user,
-          text: payload.text,
-          timestamp: moment()
-        });
-
   this.emitChange();
 });
 

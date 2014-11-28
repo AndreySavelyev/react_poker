@@ -6,7 +6,7 @@ var Store = require('../lib/Store');
 
 var UsersConstants = require('../constants/UsersConstants');
 
-var users = [ {name: 'username'}, {name: 'username2'}, {name: 'username3'} ];
+// var users = [ {name: 'username'}, {name: 'username2'}, {name: 'username3'} ];
 
 var loaded = false;
 var active = null;

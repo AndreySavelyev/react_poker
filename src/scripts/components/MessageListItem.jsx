@@ -5,14 +5,17 @@
 'use strict';
 
 var React = require('react/addons');
-// var _ = require('lodash')
-
-// var Routes = require('react-router');
-// var Link = Routes.Link;
+var UsersStore = require('../stores/UsersStore');
+var _ = require('lodash');
 
 var MessageListItem = React.createClass({
   render: function () {
-    return (<div>[{this.props.message.timestamp.format()}] {this.props.message.user}: {this.props.message.text}</div>);
+    var users = UsersStore.all();
+    console.log(users);
+    user = _.find(users, {_id: this.props.message.user})
+    var name = (user && user.name) || '<без имени>';
+
+    return (<div>[{this.props.message.time}] {name}: {this.props.message.text}</div>);
   }
 });
 
