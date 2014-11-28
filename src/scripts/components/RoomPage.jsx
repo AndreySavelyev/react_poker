@@ -10,53 +10,38 @@ var _ = require('lodash')
 var Routes = require('react-router');
 var Link = Routes.Link;
 
+var Fluxable = require('./../behaviors/Fluxable');
+var MessagesStore = require('./../stores/MessagesStore');
+var MessagesActions = require('./../actions/MessagesActions');
+
+var UsersStore = require('./../stores/UsersStore');
+// var MessagesActions = require('./../actions/MessagesActions');
+
 var MessageList = require('./MessageList');
 var UserList = require('./UserList');
 var SendForm = require('./SendForm');
-var moment = require('moment')
+
+var moment = require('moment');
 
 var RoomPage = React.createClass({
+  mixins: [Fluxable],
+  watchStores: [MessagesStore, UsersStore],
   addMessage: function(user, text){
-    console.log(user);
-    console.log(text);
-    var messages = this.state.messages
-    var m = moment();
-    messages.push({
-      id: m.unix(),
-      text: text,
-      user: user,
-      timestamp: m
-    })
-    this.setState({messages: messages});
+    MessagesActions.addMessage(user, text);
   },
-  getInitialState: function () {
+  getStateFromStores: function () {
     return {
-      currentUser: {
-        name: 'username',
-      },
-      userlist: [{name: 'username'}, {name: 'username2'}, {name: 'username3'}],
-      messages: [
-        {
-          id: 1,
-          user: 'username 1',
-          text: 'Message1',
-          timestamp: moment()
-        },
-        {
-          id: 2,
-          user: 'username2',
-          text: 'Message2',
-          timestamp: moment()
-        }
-      ]
+      currentUser: UsersStore.currentUser(),
+      userlist: UsersStore.all(),
+      messages: MessagesStore.all()
     };
   },
   render: function() {
     return (
       <div>
         <MessageList messages={this.state.messages} />
-        <UserList userlist={this.state.userlist} />
         <SendForm user={this.state.currentUser} onsubmit={this.addMessage}/>
+        <UserList userlist={this.state.userlist} />
       </div>
     );
   }

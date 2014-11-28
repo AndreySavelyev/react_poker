@@ -8,7 +8,7 @@ var React = require('react/addons');
 
 var UserListItem = React.createClass({
   render: function () {
-    return (<span>user</span>);
+    return (<div>{this.props.user.name}</div>);
   }
 });
 
